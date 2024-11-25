@@ -12,17 +12,16 @@
     @vite('resources/css/app.css')
     @livewireStyles
 </head>
-<body class="bg-gray-100 text-gray-800">
-    <div class="container mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
-        <h1 class="text-3xl font-bold text-center mb-6">Buscar Transacciones Ethereum</h1>
+        @livewire('navbar')
+
         @livewire('transaction-search')
-    </div>
 
     @vite('resources/js/app.js')
 
     @livewireScripts
+    <!-- DataTables JavaScript -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 </body>
 </html>

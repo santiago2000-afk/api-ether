@@ -5,7 +5,7 @@
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
                 <div class="flex-shrink-0">
-                    <a href="#" class="text-xl font-semibold text-blue-600 hover:text-blue-800 transition-all duration-300 ease-in-out">MyApp</a>
+                    <a href="#" class="text-xl font-semibold text-blue-600 hover:text-blue-800 transition-all duration-300 ease-in-out"><?= env('APP_NAME'); ?></a>
                 </div>
 
                 <!-- Menú de navegación - Mobile -->
@@ -23,15 +23,15 @@
                     <a href="#" class="text-sm font-medium px-3 py-2 transition-all hover:text-blue-500 hover:scale-105 transform duration-200 ease-in-out">Services</a>
                 </div>
 
-                <!-- Iconos de conectar cartera y seleccionar red -->
-                <div class="flex items-center space-x-4">
+                <!-- Iconos de conectar cartera y seleccionar red, visibles solo en pantallas grandes -->
+                <div class="flex items-center space-x-4 hidden sm:flex">
                     <!-- Icono de conectar cartera -->
-                    <a href="#" id="connect-wallet" title="Connect Wallet" class="text-blue-500 hover:text-blue-700 transition-all duration-300 ease-in-out">
+                    <a href="#" id="connect-wallet" class="text-blue-500 hover:text-blue-700 transition-all duration-300 ease-in-out">
                         <span class="material-icons text-2xl">account_balance_wallet</span> <!-- Icono de Ethereum -->
                     </a>
 
                     <!-- Icono de seleccionar red -->
-                    <a href="#" id="network-selection" title="Choose Network" class="text-green-500 hover:text-green-700 transition-all duration-300 ease-in-out">
+                    <a href="#" id="network-selection" class="text-green-500 hover:text-green-700 transition-all duration-300 ease-in-out">
                         <span class="material-icons text-2xl">network_wifi</span> <!-- Icono de red -->
                     </a>
                 </div>
@@ -57,15 +57,16 @@
 
 <!-- Script para controlar la apertura y cierre del menú en móviles -->
 <script>
+    // Abre o cierra el menú móvil
     document.getElementById("menu-toggle").addEventListener("click", function() {
         let menu = document.getElementById("mobile-menu");
-        menu.classList.toggle("translate-x-full");  // Abre o cierra el menú
-        menu.classList.toggle("hidden"); // Asegura que el menú sea visible
+        menu.classList.toggle("translate-x-full");  // Cambia la clase para abrir o cerrar el menú
+        menu.classList.toggle("translate-x-0");    // Muestra el menú (cuando se cambia a translate-x-0)
     });
 
+    // Cierra el menú al hacer clic en el botón de cerrar
     document.getElementById("close-menu").addEventListener("click", function() {
         let menu = document.getElementById("mobile-menu");
-        menu.classList.add("translate-x-full");  // Cierra el menú
-        menu.classList.add("hidden");  // Lo oculta después de cerrarlo
+        menu.classList.add("translate-x-full");  // Vuelve a ocultar el menú
     });
 </script>

@@ -67,6 +67,34 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal de Selección de Red -->
+    <div id="network-modal" class="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center hidden z-50 transition-opacity duration-300 ease-in-out opacity-0">
+        <div class="bg-white p-8 rounded-xl shadow-xl w-96 max-w-sm transform transition-all duration-300 ease-in-out scale-95 relative">
+            <!-- Botón de cerrar en la esquina superior derecha -->
+            <button id="close-network-modal" class="absolute top-4 right-4 text-red-500 hover:text-red-700 focus:outline-none text-xl transition-all duration-300 ease-in-out">
+                <span class="material-icons">close</span>
+            </button>
+
+            <div class="text-center">
+                <h2 class="text-3xl font-semibold text-blue-600 mb-6">Seleccionar Red</h2>
+                <p class="text-gray-700 mb-8">Elige una de las redes disponibles para conectarte:</p>
+
+                <!-- Opciones de red -->
+                <div class="space-y-4">
+                    <button class="bg-gradient-to-r from-indigo-500 to-indigo-600 text-white py-3 px-6 rounded-full shadow-lg hover:from-indigo-600 hover:to-indigo-700 transition-all duration-300 ease-in-out transform hover:scale-105 w-full">
+                        Ethereum Network
+                    </button>
+                    <button class="bg-gradient-to-r from-yellow-500 to-yellow-600 text-white py-3 px-6 rounded-full shadow-lg hover:from-yellow-600 hover:to-yellow-700 transition-all duration-300 ease-in-out transform hover:scale-105 w-full">
+                        BNB Smart Chain Network
+                    </button>
+                    <button class="bg-gradient-to-r from-green-500 to-green-600 text-white py-3 px-6 rounded-full shadow-lg hover:from-green-600 hover:to-green-700 transition-all duration-300 ease-in-out transform hover:scale-105 w-full">
+                        Base Network
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Script para controlar la apertura y cierre del menú en móviles -->
@@ -84,7 +112,7 @@
         menu.classList.add("translate-x-full");  // Vuelve a ocultar el menú
     });
 
-    // Abre el modal cuando se hace clic en el ícono de la billetera
+    // Abre el modal de MetaMask cuando se hace clic en el ícono de la billetera
     document.getElementById("connect-wallet").addEventListener("click", function() {
         let modal = document.getElementById("metamask-modal");
         modal.classList.remove("hidden");
@@ -93,7 +121,7 @@
         modal.querySelector(".scale-95").classList.remove("scale-95");
     });
 
-    // Cierra el modal cuando se hace clic en el botón de cerrar
+    // Cierra el modal de MetaMask cuando se hace clic en el botón de cerrar
     document.getElementById("close-modal").addEventListener("click", function() {
         let modal = document.getElementById("metamask-modal");
         modal.classList.add("hidden");
@@ -102,19 +130,21 @@
         modal.querySelector(".scale-95").classList.add("scale-95");
     });
 
-    // Cerrar el modal cuando se hace clic fuera del modal (área gris)
-    document.getElementById("metamask-modal").addEventListener("click", function(event) {
-        if (event.target === document.getElementById("metamask-modal")) {
-            document.getElementById("metamask-modal").classList.add("hidden");
-            document.getElementById("metamask-modal").classList.add("opacity-0");
-            document.getElementById("metamask-modal").classList.remove("opacity-100");
-            document.getElementById("metamask-modal").querySelector(".scale-95").classList.add("scale-95");
-        }
+    // Abre el modal de Selección de Red cuando se hace clic en el ícono de red
+    document.getElementById("network-selection").addEventListener("click", function() {
+        let modal = document.getElementById("network-modal");
+        modal.classList.remove("hidden");
+        modal.classList.remove("opacity-0");
+        modal.classList.add("opacity-100");
+        modal.querySelector(".scale-95").classList.remove("scale-95");
     });
 
-    // Acción del botón de conectar MetaMask (puedes agregar tu lógica de conexión aquí)
-    document.getElementById("metamask-connect").addEventListener("click", function() {
-        alert("Conectando con MetaMask...");
-        // Aquí iría tu lógica para conectar con MetaMask
+    // Cierra el modal de Selección de Red cuando se hace clic en el botón de cerrar
+    document.getElementById("close-network-modal").addEventListener("click", function() {
+        let modal = document.getElementById("network-modal");
+        modal.classList.add("hidden");
+        modal.classList.add("opacity-0");
+        modal.classList.remove("opacity-100");
+        modal.querySelector(".scale-95").classList.add("scale-95");
     });
 </script>

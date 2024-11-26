@@ -142,3 +142,34 @@ tr:hover {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+body {
+    font-family: 'Roboto', sans-serif; /* Aplica la fuente Roboto a todo el cuerpo */
+}
+
+.font-medium {
+    font-weight: 500; /* Estilo de texto para etiquetas */
+}
+
+.font-semibold {
+    font-weight: 600; /* Estilo de texto para la dirección */
+}
+
+.text-lg {
+    font-size: 1.125rem; /* Un tamaño de texto un poco mayor */
+}
+
+.text-gray-800 {
+    color: #2d3748; /* Color oscuro para el label */
+}
+
+.text-blue-600 {
+    color: #3182ce; /* Un azul más oscuro para la dirección */
+}
+
+.mt-4 {
+    margin-top: 1rem; /* Separación superior */
+}
+
+.break-words {
+    word-wrap: break-word;
+}

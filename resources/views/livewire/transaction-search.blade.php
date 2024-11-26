@@ -22,6 +22,25 @@
         </form>
     </div>
 
+    @if ($address)
+    <div class="mt-4 text-sm text-gray-600">
+        <label class="font-medium text-lg text-gray-800">Wallet Address</label>
+        <div class="flex items-center">
+            <span class="font-semibold text-blue-600 break-words" id="wallet-address">{{ $address }}</span>
+            <button 
+                type="button" 
+                class="ml-3 text-blue-500 hover:text-blue-700 font-semibold"
+                onclick="copyToClipboard()"
+                aria-label="Copy to clipboard"
+            >
+                <i class="fas fa-copy" title="Copy address"></i>
+            </button>
+        </div>
+    </div>
+    @endif
+
+
+
     <!-- Cargando o resultados -->
     <div id="loader" class="loader" style="display: none;">
         <div class="spinner"></div>
@@ -67,7 +86,6 @@
     @endif
 </div>
 
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 <script>
     // Función para mostrar u ocultar la tabla en función del contenido del input
     function toggleTableVisibility() {
@@ -112,4 +130,16 @@
     document.querySelector('form').addEventListener('submit', function() {
         toggleLoader(true);
     });
+
+    function copyToClipboard() {
+        const walletAddress = document.getElementById('wallet-address').textContent; // Obtener el texto de la dirección
+        const textarea = document.createElement('textarea'); // Crear un elemento de texto oculto
+        textarea.value = walletAddress; // Asignar el valor al textarea
+        document.body.appendChild(textarea); // Agregarlo al body
+        textarea.select(); // Seleccionar el contenido
+        document.execCommand('copy'); // Ejecutar el comando de copiar
+        document.body.removeChild(textarea); // Eliminar el textarea
+
+        alert('Address copied to clipboard!'); // Mostrar un mensaje de éxito (opcional)
+    }
 </script>

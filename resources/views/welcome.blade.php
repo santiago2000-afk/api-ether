@@ -7,11 +7,16 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     @vite('resources/css/app.css')
     @livewireStyles
 </head>
         @livewire('navbar')
+        <br>
+        <br>
+        <br>
         @livewire('transaction-search')
+
     @vite('resources/js/app.js')
     @livewireScripts
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

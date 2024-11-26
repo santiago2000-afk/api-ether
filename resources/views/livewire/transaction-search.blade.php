@@ -1,4 +1,4 @@
-<div class="max-w-3xl mx-auto mt-10 p-6 bg-white text-black shadow-md rounded-lg">
+<div class="max-w-3xl mx-auto mt-10 p-6 bg-white text-black shadow-md rounded-lg mt-5">
     <!-- Search Form -->
     <form wire:submit.prevent="searchTransactions" class="space-y-6">
         <div class="space-y-4">

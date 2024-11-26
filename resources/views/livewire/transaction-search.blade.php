@@ -1,89 +1,73 @@
-<div class="max-w-3xl mx-auto mt-10 p-6 bg-white text-black shadow-md rounded-lg mt-5">
-    <!-- Search Form -->
-    <form wire:submit.prevent="searchTransactions" class="space-y-6">
-        <div class="space-y-4">
-            <label for="address" class="block text-sm font-medium text-gray-700">
-                Ethereum Address
-            </label>
-            <div class="flex items-center border border-gray-300 rounded-md overflow-hidden">
+<div class="container mx-auto px-6 py-8">
+    <!-- Formulario de búsqueda -->
+    <div class="form-container bg-white p-6 rounded-lg shadow-md max-w-lg mx-auto">
+        <form wire:submit.prevent="searchTransactions" class="space-y-6">
+            <div class="space-y-4">
+                <label for="address" class="text-lg font-medium text-gray-700">Ethereum Address</label>
                 <input 
                     type="text" 
                     id="address" 
                     wire:model="address" 
-                    class="flex-1 p-3 bg-gray-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="0x..."
                     oninput="toggleTableVisibility()"
+                    class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-                <button 
-                    type="submit" 
-                    class="px-4 py-3 bg-blue-500 text-white font-medium hover:bg-blue-600 focus:outline-none transition-all">
+                <button type="submit" class="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     Search
                 </button>
             </div>
             @error('address') 
                 <span class="text-red-400 text-xs">{{ $message }}</span> 
             @enderror
-        </div>
-    </form>
-
-    <!-- Loader -->
-    <div id="loader" class="hidden absolute inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
-        <div class="w-16 h-16 border-4 border-t-4 border-blue-500 rounded-full animate-spin"></div>
+        </form>
     </div>
 
-    <!-- Error or Results -->
+    <!-- Cargando o resultados -->
+    <div id="loader" class="loader" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+
     @if ($errorMessage)
         <div class="mt-6 text-red-400 text-sm">
             {{ $errorMessage }}
         </div>
-    @elseif ($transactions)
-        <div id="transactions-container" class="mt-8">
-            <!-- Results Table -->
-            <table id="transactions-table" class="w-full border-collapse bg-white text-sm shadow-md rounded-lg">
-                <thead class="bg-gray-100">
-                    <tr>
-                        <th class="px-4 py-2 text-gray-600">Date</th>
-                        <th class="px-4 py-2 text-gray-600">Swap</th>
-                        <th class="px-4 py-2 text-gray-600">Protocol</th>
-                        <th class="px-4 py-2 text-gray-600">Transaction</th>
+    @elseif ($transactions && count($transactions) > 0)
+        <div class="table-container mt-8">
+            <table id="transactions-table" class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+                <thead>
+                    <tr class="text-left text-sm font-medium text-gray-700 bg-gray-100">
+                        <th class="px-4 py-2">Date</th>
+                        <th class="px-4 py-2">Swap</th>
+                        <th class="px-4 py-2">Protocol</th>
+                        <th class="px-4 py-2">Transaction</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-200">
+                <tbody class="text-sm text-gray-700">
                     @foreach ($transactions as $transaction)
-                        <tr>
-                            <td class="px-4 py-3 text-gray-600">
-                                {{ \Carbon\Carbon::createFromTimestamp($transaction['timeStamp'])->toDateTimeString() }}
-                            </td>
-                            <td class="px-4 py-3 text-gray-600">
-                                {{ $transaction['input'] ? substr($transaction['input'], 0, 10) . '...' : 'N/A' }}
-                            </td>
-                            <td class="px-4 py-3 text-gray-600">
-                                {{ $transaction['to'] }}
-                            </td>
-                            <td class="px-4 py-3">
-                                <a href="https://etherscan.io/tx/{{ $transaction['hash'] }}" 
-                                   target="_blank" 
-                                   class="text-blue-500 hover:underline">
-                                    View TX
-                                </a>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-4 py-2">{{ \Carbon\Carbon::createFromTimestamp($transaction['timeStamp'])->toDateTimeString() }}</td>
+                            <td class="px-4 py-2">{{ $transaction['input'] ? substr($transaction['input'], 0, 10) . '...' : 'N/A' }}</td>
+                            <td class="px-4 py-2">{{ $transaction['to'] }}</td>
+                            <td class="px-4 py-2">
+                                <a href="https://etherscan.io/tx/{{ $transaction['hash'] }}" target="_blank" class="text-blue-500 hover:text-blue-700">View TX</a>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
 
-            <!-- DataTable Pagination -->
-            <div id="pagination-container" class="mt-6 flex justify-between items-center text-sm text-gray-600">
-                <span id="page-info">Showing {{ count($transactions) }} entries</span>
-                <div id="pagination-controls" class="flex space-x-4">
-                    <!-- Pagination will be handled by DataTables -->
+            <!-- Paginación -->
+            <div class="pagination mt-6 flex justify-between items-center text-sm text-gray-600">
+                <span>Showing {{ count($transactions) }} entries</span>
+                <div class="pagination-controls">
+                    <!-- Controls generated by DataTable -->
                 </div>
             </div>
         </div>
     @endif
 </div>
 
-<!-- Script for DataTables and Loader control -->
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 <script>
     // Función para mostrar u ocultar la tabla en función del contenido del input
     function toggleTableVisibility() {
@@ -95,7 +79,7 @@
     // Función para mostrar y ocultar el loader
     function toggleLoader(show) {
         const loader = document.getElementById('loader');
-        loader.classList.toggle('hidden', !show);
+        loader.style.display = show ? 'flex' : 'none';
     }
 
     // Inicializar DataTable
@@ -106,14 +90,15 @@
             ordering: true,
             responsive: true,
             lengthChange: false,
-            pageLength: 5,  // Definir cuántas filas por página
+            pageLength: 5,
             language: {
                 emptyTable: "No transactions found.",
                 paginate: {
-                    previous: "Prev",
-                    next: "Next"
+                    previous: "<i class='fas fa-chevron-left'></i>",
+                    next: "<i class='fas fa-chevron-right'></i>"
                 }
-            }
+            },
+            dom: 'lfrtip',
         });
 
         // Actualizar información de la página actual

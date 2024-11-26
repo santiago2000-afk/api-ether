@@ -17,9 +17,9 @@
 
                 <!-- Desktop Navigation Menu -->
                 <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#" class="text-sm font-medium px-3 py-2 transition-all hover:text-blue-500 hover:scale-105 transform duration-200 ease-in-out">Home</a>
-                    <a href="#" class="text-sm font-medium px-3 py-2 transition-all hover:text-blue-500 hover:scale-105 transform duration-200 ease-in-out">About</a>
-                    <a href="#" class="text-sm font-medium px-3 py-2 transition-all hover:text-blue-500 hover:scale-105 transform duration-200 ease-in-out">Services</a>
+                    <a href="#" class="text-sm font-medium px-3 py-2 transition-all hover:text-blue-500 hover:scale-105 transform duration-200 ease-in-out">Walles</a>
+                    <a href="#" class="text-sm font-medium px-3 py-2 transition-all hover:text-blue-500 hover:scale-105 transform duration-200 ease-in-out">My Walles</a>
+                    <a href="#" class="text-sm font-medium px-3 py-2 transition-all hover:text-blue-500 hover:scale-105 transform duration-200 ease-in-out">Portafolio</a>
                 </div>
 
                 <!-- Wallet Connect, Network Selection and Dark/Light Mode Icons -->
@@ -49,9 +49,9 @@
             </button>
         </div>
         <div class="flex flex-col items-center space-y-4 mt-8">
-            <a href="#" class="text-xl text-gray-600 hover:text-blue-500">Home</a>
-            <a href="#" class="text-xl text-gray-600 hover:text-blue-500">About</a>
-            <a href="#" class="text-xl text-gray-600 hover:text-blue-500">Services</a>
+            <a href="#" class="text-xl text-gray-600 hover:text-blue-500">Walles</a>
+            <a href="#" class="text-xl text-gray-600 hover:text-blue-500">My Walles</a>
+            <a href="#" class="text-xl text-gray-600 hover:text-blue-500">Portfolio</a>
         </div>
     </div>
 

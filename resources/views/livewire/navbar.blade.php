@@ -26,12 +26,12 @@
                 <!-- Iconos de conectar cartera y seleccionar red -->
                 <div class="flex items-center space-x-4">
                     <!-- Icono de conectar cartera -->
-                    <a href="#" id="connect-wallet" class="text-blue-500 hover:text-blue-700 transition-all duration-300 ease-in-out">
+                    <a href="#" id="connect-wallet" title="Connect Wallet" class="text-blue-500 hover:text-blue-700 transition-all duration-300 ease-in-out">
                         <span class="material-icons text-2xl">account_balance_wallet</span> <!-- Icono de Ethereum -->
                     </a>
 
                     <!-- Icono de seleccionar red -->
-                    <a href="#" id="network-selection" class="text-green-500 hover:text-green-700 transition-all duration-300 ease-in-out">
+                    <a href="#" id="network-selection" title="Choose Network" class="text-green-500 hover:text-green-700 transition-all duration-300 ease-in-out">
                         <span class="material-icons text-2xl">network_wifi</span> <!-- Icono de red -->
                     </a>
                 </div>

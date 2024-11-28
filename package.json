@@ -17,6 +17,7 @@
         "vite": "^5.0"
     },
     "dependencies": {
+        "alpinejs": "^3.14.4",
         "ethers": "^6.13.4",
         "web3": "^4.15.0"
     }

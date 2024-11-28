@@ -11,21 +11,21 @@ class TransactionSearch extends Component
     public $transactions = [];
     public $errorMessage;
     public $currentPage = 1;
-    public $pageSize = 10; // Número de transacciones por página
+    public $pageSize = 50; // Número de transacciones por página
     public $totalTransactions = 0;
     public $balance; // Para almacenar el saldo de la dirección
 
     public function searchTransactions()
     {
-        $this->errorMessage = null; // Reset the error message
-        $this->transactions = []; // Reset transactions
-
+        $this->errorMessage = null; // Resetear el mensaje de error
+        $this->transactions = []; // Resetear las transacciones
+    
         // Validar la dirección Ethereum
         if (!preg_match('/^0x[a-fA-F0-9]{40}$/', $this->address)) {
             $this->errorMessage = 'La dirección Ethereum no es válida.';
             return;
         }
-
+    
         // Llamada a la API de Etherscan para obtener transacciones
         $apiKey = env('ETHERSCAN_API_KEY'); // Configura tu clave en .env
         $response = Http::get('https://api.etherscan.io/api', [
@@ -39,49 +39,25 @@ class TransactionSearch extends Component
             'sort' => 'desc', // Transacciones más recientes primero
             'apikey' => $apiKey,
         ]);
-
+    
+        // Verifica si la respuesta es exitosa y contiene el campo 'result'
         $data = $response->json();
-
-        if ($data['status'] == '1' && isset($data['result'])) {
-            $this->transactions = $data['result'];
-            $this->totalTransactions = count($data['result']); // Etherscan no devuelve total real en la API gratuita
+    
+        // Inspeccionar la respuesta
+        if ($data['status'] != '1') {
+            // Si el estado no es 1, logueamos el error para depurar
+            $this->errorMessage = 'Error al obtener las transacciones: ' . $data['message'];
+            \Log::error('Etherscan API Error:', $data); // Log de error
         } else {
-            $this->errorMessage = 'No se pudieron recuperar las transacciones o la dirección no tiene transacciones.';
+            if (isset($data['result']) && !empty($data['result'])) {
+                $this->transactions = $data['result'];
+                $this->totalTransactions = count($data['result']); // Etherscan no devuelve el total real en la API gratuita
+            } else {
+                // Si no hay transacciones, mostrar mensaje específico
+                $this->errorMessage = 'La dirección no tiene transacciones.';
+            }
         }
-    }
-
-    // Función para obtener el saldo de la dirección
-    public function getBalance()
-    {
-        $this->errorMessage = null; // Reset error message
-        $this->balance = null; // Reset balance
-
-        // Validar la dirección Ethereum
-        if (!preg_match('/^0x[a-fA-F0-9]{40}$/', $this->address)) {
-            $this->errorMessage = 'La dirección Ethereum no es válida.';
-            return;
-        }
-
-        // Llamada a la API de Etherscan para obtener el saldo
-        $apiKey = env('ETHERSCAN_API_KEY'); // Configura tu clave en .env
-        $response = Http::get('https://api.etherscan.io/api', [
-            'module' => 'account',
-            'action' => 'balance',
-            'address' => $this->address,
-            'tag' => 'latest',
-            'apikey' => $apiKey,
-        ]);
-
-        $data = $response->json();
-
-        if ($data['status'] == '1' && isset($data['result'])) {
-            // El saldo está en Wei, convertirlo a ETH
-            $weiBalance = $data['result'];
-            $this->balance = $weiBalance / 1e18; // Convertir de Wei a ETH
-        } else {
-            $this->errorMessage = 'No se pudo obtener el saldo de la dirección.';
-        }
-    }
+    }    
 
     public function goToPage($page)
     {

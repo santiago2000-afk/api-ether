@@ -39,7 +39,6 @@
     </div>
     @endif
 
-    
     <!-- Cargando o resultados -->
     <div id="loader" class="loader" style="display: none;">
         <div class="spinner"></div>
@@ -90,21 +89,19 @@
         tableContainer.style.display = input === '' ? 'none' : 'block';
     }
 
-    // Función para mostrar y ocultar el loader
     function toggleLoader(show) {
         const loader = document.getElementById('loader');
         loader.style.display = show ? 'flex' : 'none';
     }
 
-    // Inicializar DataTable con paginación, scroll infinito y más de 50 registros por página
     document.addEventListener('DOMContentLoaded', function() {
         const table = $('#transactions-table').DataTable({
-            paging: true, // Habilitar paginación
-            searching: false, // Deshabilitar la búsqueda
-            ordering: true, // Permitir ordenamiento
-            responsive: true, // Hacer la tabla adaptable
-            lengthChange: true, // Permitir cambiar la cantidad de registros por página
-            pageLength: 50, // Número de registros por página (cambiado a 50)
+            paging: true,
+            searching: false,
+            ordering: true,
+            responsive: true,
+            lengthChange: true,
+            pageLength: 50,
             language: {
                 emptyTable: "No transactions found.",
                 paginate: {
@@ -112,28 +109,22 @@
                     next: "<i class='fas fa-chevron-right'></i>"
                 }
             },
-            dom: 'lfrtip', // Esto asegura que la tabla incluya la paginación
-            scrollY: '400px', // Altura fija para habilitar el scroll
-            scrollCollapse: true, // Colapsar la tabla si no hay suficientes registros
-            scroller: true, // Permitir scroll infinito
-            fixedHeader: true, // Fijar la cabecera de la tabla al hacer scroll
+            dom: 'lfrtip',
+            scrollY: '400px',
+            scrollCollapse: true,
+            scroller: true,
+            fixedHeader: true,
         });
-
-        // El contenedor de la paginación se generará automáticamente dentro de DataTable
-        // No es necesario agregarlo manualmente
     });
 
-    // Mostrar el loader cuando el formulario se envíe
     document.querySelector('form').addEventListener('submit', function() {
-        toggleLoader(true); // Mostrar el loader
+        toggleLoader(true);
     });
 
-    // Ocultar el loader cuando los datos estén listos
     document.querySelector('.table-container').addEventListener('load', function() {
         toggleLoader(false); // Ocultar el loader
     });
 
-    // Función para copiar la dirección al portapapeles
     function copyToClipboard() {
         const walletAddress = document.getElementById('wallet-address').textContent; // Obtener el texto de la dirección
         const textarea = document.createElement('textarea'); // Crear un elemento de texto oculto

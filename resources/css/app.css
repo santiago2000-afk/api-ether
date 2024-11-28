@@ -174,3 +174,37 @@ body {
 .break-words {
     word-wrap: break-word;
 }
+
+/* Estilo del mensaje de error */
+.error-message {
+    background-color: #fef2f2;
+    border-left: 4px solid #f87171;
+    color: #b91c1c;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Estilo del mensaje de advertencia */
+.warning-message {
+    background-color: #fffbeb;
+    border-left: 4px solid #f59e0b;
+    color: #9a6a0d;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    transition: all 0.3s ease-in-out;
+}
+
+.material-icons {
+    font-size: 20px;
+}
+
+.warning-message i, .error-message i {
+    margin-right: 8px;
+}

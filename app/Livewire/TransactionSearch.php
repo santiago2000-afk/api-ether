@@ -15,6 +15,10 @@ class TransactionSearch extends Component
     public $totalTransactions = 0;
     public $balance; // Para almacenar el saldo de la dirección
 
+    public function updatedAddress() {
+        $this->searchTransactions();
+    }
+
     public function searchTransactions()
     {
         $this->errorMessage = null; // Resetear el mensaje de error

@@ -6,15 +6,15 @@ use Livewire\Component;
 
 class Navbar extends Component
 {
-    public $active = 'home'; // Para manejar la sección activa
+    public $currentPage = 'home';
 
-    public function setActive($section)
+    public function changePage($page)
     {
-        $this->active = $section; // Cambiar la sección activa
+        $this->currentPage = $page;
     }
 
     public function render()
     {
-        return view('livewire.navbar');
+        return view('livewire.navbar')->layout('layouts.app');
     }
 }

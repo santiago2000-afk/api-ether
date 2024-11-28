@@ -15,6 +15,7 @@ class TransactionSearch extends Component
     public $totalTransactions = 0;
     public $balance; // Para almacenar el saldo de la dirección
 
+
     public function updatedAddress() {
         $this->searchTransactions();
     }
@@ -71,6 +72,6 @@ class TransactionSearch extends Component
 
     public function render()
     {
-        return view('livewire.transaction-search');
+        return view('livewire.transaction-search')->layout('layouts.app');
     }
 }

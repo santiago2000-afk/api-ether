@@ -17,9 +17,8 @@
 
                 <!-- Desktop Navigation Menu -->
                 <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#" class="text-sm font-medium px-3 py-2 transition-all hover:text-blue-500 hover:scale-105 transform duration-200 ease-in-out">Walles</a>
-                    <a href="#" class="text-sm font-medium px-3 py-2 transition-all hover:text-blue-500 hover:scale-105 transform duration-200 ease-in-out">My Walles</a>
-                    <a href="#" class="text-sm font-medium px-3 py-2 transition-all hover:text-blue-500 hover:scale-105 transform duration-200 ease-in-out">Portafolio</a>
+                    <a href="#" @click.prevent="currentPage = 'wallets'" class="text-dark">Wallets</a>
+                    <a href="#" @click.prevent="currentPage = 'myWallets'" class="text-dark">My Wallets</a>
                 </div>
 
                 <!-- Wallet Connect, Network Selection and Dark/Light Mode Icons -->
@@ -43,15 +42,13 @@
     <!-- Mobile Dropdown Menu -->
     <div id="mobile-menu" class="md:hidden fixed top-0 left-0 w-full h-full bg-white z-40 transform translate-x-full transition-all duration-300 ease-in-out">
         <div class="flex justify-between items-center p-4 bg-blue-600">
-            <a href="#" class="text-xl font-semibold text-white">MyApp</a>
+            <a href="" class="text-xl font-semibold text-white">MyApp</a>
             <button id="close-menu" class="text-white">
                 <span class="material-icons text-2xl">close</span>
             </button>
         </div>
         <div class="flex flex-col items-center space-y-4 mt-8">
-            <a href="#" class="text-xl text-gray-600 hover:text-blue-500">Walles</a>
-            <a href="#" class="text-xl text-gray-600 hover:text-blue-500">My Walles</a>
-            <a href="#" class="text-xl text-gray-600 hover:text-blue-500">Portfolio</a>
+            <a href="#" @click.prevent="currentPage = 'wallets'" class="text-white">Wallets</a>
         </div>
     </div>
 

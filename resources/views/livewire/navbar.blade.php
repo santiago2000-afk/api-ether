@@ -48,7 +48,8 @@
             </button>
         </div>
         <div class="flex flex-col items-center space-y-4 mt-8">
-            <a href="#" @click.prevent="currentPage = 'wallets'" class="text-white">Wallets</a>
+            <a href="#" @click.prevent="currentPage = 'home'" class="text-dark">Wallets</a>
+            <a href="#" @click.prevent="currentPage = 'myWallets'" class="text-dark">My Wallets</a>
         </div>
     </div>
 
@@ -99,22 +100,31 @@
     </div>
 </div>
 
-<!-- Script for controlling mobile menu open and close, dark/light mode toggle -->
+<!-- Script para controlar el menú móvil y otras interacciones -->
 <script>
-    // Open or close mobile menu
+    // Abrir o cerrar el menú móvil
     document.getElementById("menu-toggle").addEventListener("click", function() {
         let menu = document.getElementById("mobile-menu");
-        menu.classList.toggle("translate-x-full");  // Toggle menu visibility
-        menu.classList.toggle("translate-x-0");    // Show menu (by switching to translate-x-0)
+        menu.classList.toggle("translate-x-full");  // Toggle de visibilidad del menú
+        menu.classList.toggle("translate-x-0");    // Mostrar el menú (al cambiar a translate-x-0)
     });
 
-    // Close menu when clicking on close button
+    // Cerrar el menú cuando se hace clic en el botón de cerrar
     document.getElementById("close-menu").addEventListener("click", function() {
         let menu = document.getElementById("mobile-menu");
-        menu.classList.add("translate-x-full");  // Hide menu again
+        menu.classList.add("translate-x-full");  // Ocultar el menú
     });
 
-    // Open MetaMask modal when clicking on the wallet icon
+    // Cerrar el menú móvil al hacer clic en cualquier opción del menú
+    const menuLinks = document.querySelectorAll('#mobile-menu a');  // Obtener todos los enlaces del menú móvil
+    menuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            let menu = document.getElementById("mobile-menu");
+            menu.classList.add("translate-x-full");  // Cerrar el menú
+        });
+    });
+
+    // Abrir el modal de MetaMask al hacer clic en el icono de wallet
     document.getElementById("connect-wallet").addEventListener("click", function() {
         let modal = document.getElementById("metamask-modal");
         modal.classList.remove("hidden");
@@ -123,7 +133,7 @@
         modal.querySelector(".scale-95").classList.remove("scale-95");
     });
 
-    // Close MetaMask modal when clicking on close button
+    // Cerrar el modal de MetaMask al hacer clic en el botón de cerrar
     document.getElementById("close-modal").addEventListener("click", function() {
         let modal = document.getElementById("metamask-modal");
         modal.classList.add("hidden");
@@ -132,7 +142,7 @@
         modal.querySelector(".scale-95").classList.add("scale-95");
     });
 
-    // Open network selection modal when clicking on the network icon
+    // Abrir el modal de selección de red al hacer clic en el icono de red
     document.getElementById("network-selection").addEventListener("click", function() {
         let modal = document.getElementById("network-modal");
         modal.classList.remove("hidden");
@@ -141,7 +151,7 @@
         modal.querySelector(".scale-95").classList.remove("scale-95");
     });
 
-    // Close network selection modal when clicking on close button
+    // Cerrar el modal de selección de red al hacer clic en el botón de cerrar
     document.getElementById("close-network-modal").addEventListener("click", function() {
         let modal = document.getElementById("network-modal");
         modal.classList.add("hidden");
@@ -150,14 +160,14 @@
         modal.querySelector(".scale-95").classList.add("scale-95");
     });
 
-    // Dark/Light Mode Toggle functionality
+    // Funcionalidad de cambio entre modo oscuro y claro
     document.getElementById("dark-light-toggle").addEventListener("click", function() {
         let body = document.body;
         body.classList.toggle("dark");
         let darkIcon = document.getElementById("dark-icon");
         let lightIcon = document.getElementById("light-icon");
         
-        // Toggle icons
+        // Alternar los íconos
         darkIcon.classList.toggle("hidden");
         lightIcon.classList.toggle("hidden");
     });

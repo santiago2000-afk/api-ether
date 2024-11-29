@@ -17,7 +17,7 @@
 
                 <!-- Desktop Navigation Menu -->
                 <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#" @click.prevent="currentPage = 'wallets'" class="text-dark">Wallets</a>
+                    <a href="#" @click.prevent="currentPage = 'home'" class="text-dark">Wallets</a>
                     <a href="#" @click.prevent="currentPage = 'myWallets'" class="text-dark">My Wallets</a>
                 </div>
 
